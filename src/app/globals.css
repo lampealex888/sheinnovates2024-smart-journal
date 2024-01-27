@@ -88,3 +88,20 @@ body {
   display: block;
 }
 
+.footer {
+  height: 230px;
+  background-color: gray;
+}
+
+.dropdown {
+  margin: auto;
+}
+
+.slogan {
+  width: 500%;
+  margin-left: 10%;
+  font-family: "Lucida Handwriting", cursive;
+  font-size: 250%;
+  position:relative;
+  top: 50px;
+}
