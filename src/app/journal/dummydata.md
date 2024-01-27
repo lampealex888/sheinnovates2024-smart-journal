@@ -1,0 +1,6 @@
+- woke up
+- ate breakfast
+- worked on journaling
+- tried to add ai
+- am stuck
+- help
