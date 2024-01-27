@@ -88,6 +88,38 @@ body {
   display: block;
 }
 
+.calendar_image{
+  width: 200%; 
+  max-width: 200px; 
+  max-height: 300px;
+  overflow: hidden; 
+}
+
+body {
+  margin: 0; 
+}
+
+.main-content {
+  padding-top: 175px; 
+}
+
+.block0{
+  padding-top: 0px;
+}
+.block1{
+  padding-top:  100px; 
+
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.block2{
+  padding-top:  50px; 
+}
+
 .footer {
   height: 230px;
   background-color: gray;
