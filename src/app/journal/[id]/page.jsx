@@ -2,10 +2,8 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 export default function JournalEntry({ params }) {
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -13,7 +11,14 @@ export default function JournalEntry({ params }) {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("/api/journals/getEntry/" + params.id);
+        console.log(params.id, params.userId, "params2")
+        console.log(params, "params3");
+        const res = await axios.get("/api/journals/getEntry/", {
+          params: {
+            id: params,
+          },
+        });
+
         setData(res.data.data);
         console.log(res.data.data);
       } catch (error) {
