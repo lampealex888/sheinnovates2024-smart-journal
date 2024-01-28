@@ -13,7 +13,7 @@ export default function Chat() {
         {messages.map((m) => (
           <div key={m.id} className="p-2 bg-base-200 rounded-lg">
             <span
-              className={m.role === "user" ? "text-primary" : "text-secondary"}
+              className={m.role === "user" ? "text-success" : "text-info"}
             >
               {m.role === "user" ? "User: " : "AI: "}
             </span>

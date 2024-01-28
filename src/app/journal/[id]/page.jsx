@@ -27,22 +27,20 @@ export default function JournalEntry({ params }) {
   }, []);
 
   return (
-    <div className="max-w-lg mx-auto p-4 bg-base-100 shadow rounded-lg">
-      <div>
-        {loading ? (
-          "Loading"
-        ) : (
-          <>
-            <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
-            {data.date ? (
-              <span className="text-neutral">
-                {format(parseISO(data.date), "MM/dd/yyyy")}
-              </span>
-            ) : null}
-            <p>{data.content}</p>
-          </>
-        )}
-      </div>
-    </div>
+    <>
+      {loading ? (
+        "Loading"
+      ) : (
+        <div className="max-w-7xl mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
+          <h1 className="text-3xl font-bold mb-2">{data.title}</h1>
+          {data.date == null ? null : (
+            <p className="text-neutral-content">
+              {format(parseISO(data.date), "MM/dd/yyyy")}
+            </p>
+          )}
+          <p>{data.content}</p>
+        </div>
+      )}
+    </>
   );
 }

@@ -12,7 +12,7 @@ function WeatherPage() {
   const getWeather = async (e) => {
     e.preventDefault();
     const loc = e.target.elements.loc.value;
-    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${loc}`;
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${loc}`;
     try {
       const res = await axios.get(url);
       setWeather({

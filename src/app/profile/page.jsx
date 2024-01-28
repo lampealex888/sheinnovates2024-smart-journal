@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import router from "next/router";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function ProfilePage() {
 
   const logout = async () => {
     try {
+      Cookies.remove('loggedIn');
       await axios.get("/api/users/logout");
       router.push("/login");
     } catch (error) {

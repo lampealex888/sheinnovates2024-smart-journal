@@ -20,6 +20,7 @@
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "date-fns": "^3.3.1",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongodb-client-encryption": "^6.0.0",
