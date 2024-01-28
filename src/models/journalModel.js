@@ -14,9 +14,9 @@ const journalSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide body"],
   },
-  userId: {
+  users: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users._id",
+    ref: "users",
     required: [true, "Please provide user ID"],
   },
 });
