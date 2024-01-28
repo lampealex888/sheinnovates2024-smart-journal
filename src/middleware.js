@@ -19,5 +19,5 @@ export function middleware(request) {
 
 // Blocked paths for unlogged users
 export const config = {
-  matcher: ["/profile", "/login", "/signup", "/verifyemail", "/journal", "/weather", "/calendar", "/chat"],
+  matcher: ["/profile", "/login", "/signup", "/verifyemail"],
 };

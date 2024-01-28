@@ -75,27 +75,27 @@ export default function Calendar() {
   }
 
   return (
-    <>
-      <div className="max-w-3xl max-h-fit mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-4">Calendar</h1>
-        <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay",
-          }}
-          events={allEvents}
-          nowIndicator={true}
-          editable={true}
-          droppable={true}
-          selectable={true}
-          selectMirror={true}
-          dateClick={handleDateClick}
-          drop={(data) => addEvent(data)}
-          eventClick={(data) => handleDeleteModal(data)}
-        />
-      </div>
+      <main>
+        <div className="max-w-7xl mx-auto mb-10 rounded-lg shadow-lg">
+          <span className="text-3xl font-bold mb-4">Calendar</span>
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,timeGridDay",
+            }}
+            events={allEvents}
+            nowIndicator={true}
+            editable={true}
+            droppable={true}
+            selectable={true}
+            selectMirror={true}
+            dateClick={handleDateClick}
+            drop={(data) => addEvent(data)}
+            eventClick={(data) => handleDeleteModal(data)}
+          />
+        </div>
 
       <Transition.Root show={showDeleteModal} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setShowDeleteModal}>
@@ -251,6 +251,6 @@ export default function Calendar() {
           </div>
         </Dialog>
       </Transition.Root>
-    </>
+      </main>
   );
 }

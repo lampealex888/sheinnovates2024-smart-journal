@@ -1,6 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState();
+
+  useEffect(() => {
+    if (Cookies.get("loggedIn") === "true") {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
   return (
     <main className="Home_page">
       <div className="everything Home_page">
@@ -15,12 +29,20 @@ export default function Home() {
                 Connect with others to plan meetups, receive reminders, and get
                 calendar suggestions.
               </p>
-              <Link href="/login" className="btn btn-primary px-10 mr-5">
-                Log In
-              </Link>
-              <Link href="/signup" className="btn btn-secondary px-10">
-                Sign Up
-              </Link>
+              {isLoggedIn ? (
+                <Link className="btn btn-accent px-10 mr-5 text-lg" href="/profile">
+                  Profile
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login" className="btn btn-primary px-10 mr-5 text-lg">
+                    Log In
+                  </Link>
+                  <Link href="/signup" className="btn btn-secondary px-10 text-lg">
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 
