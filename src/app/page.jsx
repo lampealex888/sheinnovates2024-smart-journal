@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -16,10 +15,10 @@ export default function Home() {
                 Connect with others to plan meetups, receive reminders, and get
                 calendar suggestions.
               </p>
-              <Link href="/login" className="btn btn-info btn-primary">
+              <Link href="/login" className="btn btn-primary px-10 mr-5">
                 Log In
               </Link>
-              <Link href="/signup" className="btn btn-info btn-secondary">
+              <Link href="/signup" className="btn btn-secondary px-10">
                 Sign Up
               </Link>
             </div>
