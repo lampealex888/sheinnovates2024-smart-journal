@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.501.0",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/react": "^6.1.10",
+    "@fullcalendar/timegrid": "^6.1.10",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "axios": "^1.6.7",
