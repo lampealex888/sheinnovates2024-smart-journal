@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,10 +19,10 @@ export default function CreateJournalEntry({ params }) {
   const onEntry = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/users/me");
-      setEntry({ ...entry, userId: res.data.data._id });
+      const user = await axios.get("/api/users/me");
+      setEntry({ ...entry, userId: user.data.data._id });
       const response = await axios.post("/api/journals/createEntry", entry);
-      router.back();
+      router.push("/journal");
     } catch (error) {
       console.log("Entry failed", error.message);
     } finally {
@@ -80,13 +81,14 @@ export default function CreateJournalEntry({ params }) {
       />
       <button
         onClick={onEntry}
-        className={`mt-4 rounded-lg btn btn-success text-lg font-semibold ${
+        disabled={buttonDisabled}
+        className={`mt-4 rounded-lg btn btn-success text-lg font-semibold mr-4 ${
           buttonDisabled ? "opacity-50 cursor-not-allowed" : null
         }`}
       >
         {loading ? "Processing" : "Create Entry"}
       </button>
-      <Link className="block mt-2 text-sm link-info link-hover" href="/journal">
+      <Link className="mt-4 rounded-lg btn btn-outline btn-info text-lg font-semibold" href="/journal">
         Go back
       </Link>
     </div>
