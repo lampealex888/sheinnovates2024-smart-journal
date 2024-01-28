@@ -21,13 +21,24 @@ export default function JournlPage() {
   };
 
   return (
-    <div className="flex flex-col justify-start items-start">
-      <h1>Journals</h1>
-      <Link href="/journal/create">Create Journal Entry</Link>
-      <button onClick={getJournalEntries}>Get Journal Entries</button>
-      <h2>
+    <div className="max-w-lg mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-4">Journals</h1>
+      <div className="flex flex-col gap-4">
+        <button className="btn btn-primary text-lg">
+          <Link href="/journal/create">
+            Create Journal Entry
+          </Link>
+        </button>
+        <button
+          onClick={getJournalEntries}
+          className="btn btn-secondary text-lg"
+        >
+          Get Journal Entries
+        </button>
+      </div>
+      <div className="flex flex-col">
         {data.length === 0
-          ? "Nothing"
+          ? null
           : data.map((entry) => (
               <div
                 key={entry._id}
@@ -41,7 +52,7 @@ export default function JournlPage() {
                 </Link>
               </div>
             ))}
-      </h2>
+      </div>
     </div>
   );
 }

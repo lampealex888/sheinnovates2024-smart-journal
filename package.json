@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.501.0",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/react": "^6.1.10",
+    "@fullcalendar/timegrid": "^6.1.10",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "ai": "^2.2.31",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
@@ -22,7 +27,8 @@
     "nodemailer": "^6.9.8",
     "react": "^18",
     "react-dom": "^18",
-    "react-simplemde-editor": "^5.2.0"
+    "react-simplemde-editor": "^5.2.0",
+    "theme-change": "^2.5.0"
   },
   "devDependencies": {
     "@types/node": "20.11.8",
