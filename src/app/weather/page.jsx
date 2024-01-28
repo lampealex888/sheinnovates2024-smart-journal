@@ -1,7 +1,8 @@
+'use client';
+
 import React, { useState } from "react";
 import axios from "axios";
 
-const Weath = dynamic(() => import("../components/weather"), {
 function WeatherPage() {
   const [weather, setWeather] = useState("");
   const [city, setCity] = useState("");
@@ -13,12 +14,13 @@ function WeatherPage() {
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${loc}`;
     try {
       const res = await axios.get(url);
+      console.log(res)
       setWeather({
-        descp: res.current.condition.text,
-        temp: res.current.temp_f,
-        city: res.location.name,
-        humidity: res.current.humidity,
-        press: res.current.pressure_in,
+        descp: res.data.current.condition.text,
+        temp: res.data.current.temp_f,
+        city: res.data.location.name,
+        humidity: res.data.current.humidity,
+        press: res.data.current.pressure_in,
       });
       setCity(res.data.name);
     } catch (error) {
