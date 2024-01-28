@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="footer p-10 text-secondary-content">
+    <footer className="footer p-10 text-neutral-content bg-neutral">
       <aside>
         <svg
           width="50"
@@ -23,7 +23,7 @@ export default function Footer() {
           Think Smart, Write Smarter: The Journal Revolution!
         </p>
       </aside>
-      <div className="dropdown mb-72">
+      <div className="dropdown dropdown-top">
         <div tabIndex={0} role="button" className="btn m-1">
           Theme
           <svg

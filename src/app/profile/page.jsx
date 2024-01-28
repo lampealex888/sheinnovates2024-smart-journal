@@ -23,17 +23,30 @@ export default function ProfilePage() {
     setData(res.data.data._id);
   };
   return (
-    <div>
-      <h1>Profile</h1>
+    <div className="max-w-lg mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-4">Profile</h1>
       <h2>
-        {data === "nothing" ? (
-          "Nothing"
-        ) : (
-          <Link href={"profile/${data}"}>{data}</Link>
+        {data === "nothing" ? null : (
+          <Link
+            className="text-secondary hover:underline"
+            href={`/profile/${data}`}
+          >
+            {data}
+          </Link>
         )}
       </h2>
-      <button onClick={logout}>Logout</button>
-      <button onClick={getUserDetails}>Details</button>
+      <button
+        onClick={logout}
+        className="btn btn-error rounded-lg mr-2 text-lg"
+      >
+        Logout
+      </button>
+      <button
+        onClick={getUserDetails}
+        className="btn btn-warning rounded-lg text-lg"
+      >
+        Details
+      </button>
     </div>
   );
 }

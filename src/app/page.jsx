@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -16,10 +15,10 @@ export default function Home() {
                 Connect with others to plan meetups, receive reminders, and get
                 calendar suggestions.
               </p>
-              <Link href="/login" className="btn btn-info btn-primary">
+              <Link href="/login" className="btn btn-primary px-10 mr-5">
                 Log In
               </Link>
-              <Link href="/signup" className="btn btn-info btn-secondary">
+              <Link href="/signup" className="btn btn-secondary px-10">
                 Sign Up
               </Link>
             </div>
@@ -47,7 +46,7 @@ export default function Home() {
           <div className="bigCalendar">
             <div className="bigCalender">
               <img
-                class="center"
+                className="center"
                 src="https://assets-global.website-files.com/5fcb349058268443b1f5dbdb/6287995cde0a4d34a94beea1_new-image.webp"
                 alt="Your Image Alt Text"
                 width={900}
@@ -73,10 +72,10 @@ export default function Home() {
       </div>
 
       {/* scroll indicator */}
-      <div class="header">
+      <div className="header">
         {/* <h2>Scroll Indicator</h2> */}
-        <div class="progress-container">
-          <div class="progress-bar" id="myBar"></div>
+        <div className="progress-container">
+          <div className="progress-bar" id="myBar"></div>
         </div>
       </div>
     </main>
