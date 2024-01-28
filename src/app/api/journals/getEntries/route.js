@@ -7,8 +7,8 @@ connect();
 
 export async function GET(request) {
   try {
-    const userId = await getDataFromToken(request);
-    const journals = await Journal.find({ userId });
+    const user = await getDataFromToken(request);
+    const journals = await Journal.find({ user });
     if (!journals) {
       return NextResponse.json({ message: "Journals not found" }, { status: 404 });
     }

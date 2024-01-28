@@ -3,7 +3,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ObjectId } from "mongodb";
 
 export default function JournalEntry({ params }) {
 

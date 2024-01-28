@@ -1,6 +1,5 @@
 "use client";
-import styles from "../globals.css";
-
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -28,19 +27,22 @@ export default function Header() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Home</a>
+              <Link href="/weather">Weather</Link>
             </li>
             <li>
-              <a>Help</a>
+              <Link href="chat">Chat</Link>
             </li>
             <li>
-              <a>Contact Us</a>
+              <Link href="">Journal</Link>
+            </li>
+            <li>
+              <Link href="">Journal</Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Smart Journal</a>
+        <Link href="/" className="btn btn-ghost text-xl">Smart Journal</Link>
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
