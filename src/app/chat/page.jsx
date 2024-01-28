@@ -6,7 +6,7 @@ export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
-    <div className="max-w-lg mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
+    <div className="max-w-5xl mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg flex flex-col justify-end">
       <h1 className="text-3xl font-bold">Chat</h1>
 
       <div className="flex flex-col gap-2">

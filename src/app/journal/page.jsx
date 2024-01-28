@@ -2,11 +2,10 @@
 
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { format, parseISO } from "date-fns";
 
 export default function JournlPage() {
-  const router = useRouter();
   const [data, setData] = useState([]);
 
   const getJournalEntries = async () => {
@@ -21,9 +20,9 @@ export default function JournlPage() {
   };
 
   return (
-    <div className="max-w-lg mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
+    <div className="max-w-7xl mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold mb-4">Journals</h1>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-row gap-4">
         <button className="btn btn-primary text-lg">
           <Link href="/journal/create">
             Create Journal Entry
@@ -36,7 +35,7 @@ export default function JournlPage() {
           Get Journal Entries
         </button>
       </div>
-      <div className="flex flex-col">
+      <div className="grid grid-cols-3 gap-4">
         {data.length === 0
           ? null
           : data.map((entry) => (
@@ -45,10 +44,12 @@ export default function JournlPage() {
                 className="border border-neutral p-4 rounded-lg mt-4"
               >
                 <Link
-                  className="link link-hover link-info"
+                  className="link link-hover link-info flex flex-col"
                   href={`/journal/${entry._id}`}
                 >
-                  {entry.title}
+                  <span className="text-2xl font-bold mb-2">{entry.title}</span>
+                  <span className="text-neutral-content">{format(parseISO(entry.date), 'MM/dd/yyyy')}</span>
+                  <span>{entry.content.substring(0, 50)}</span>
                 </Link>
               </div>
             ))}
