@@ -6,6 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { INITIAL_EVENTS, createEventId } from "./calendar-event-utils";
+import { formatDate } from "@fullcalendar/core";
 
 export default class Calendar extends React.Component {
   state = {
@@ -16,7 +17,7 @@ export default class Calendar extends React.Component {
   render() {
     return (
       <div>
-        {this.renderSidebar()}
+        {this.renderOptions()}
         <div>
           <FullCalendar
             plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
@@ -26,36 +27,32 @@ export default class Calendar extends React.Component {
               right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
             initialView="dayGridMonth"
-            events={[{ title: "event 1", date: "2024-01-27" }]}
             editable={true}
             selectable={true}
             selectMirror={true}
             select={this.handleDateSelect}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            //select={this.handleDateSelect}
+            eventContent={this.renderEventContent}
+            eventClick={this.handleEventClick}
+            eventsSet={this.handleEvents}
           />
         </div>
       </div>
     );
   }
 
-  renderSidebar() {
+  renderOptions() {
     return (
       <div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            Toggle Weekends
-          </label>
-        </div>
-        <div>
-          <button onClick={this.handleEventAdd}>Add Event</button>
-        </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={this.state.weekendsVisible}
+            onChange={this.handleWeekendsToggle}
+          ></input>
+          Toggle Weekends
+        </label>
       </div>
     );
   }
@@ -70,7 +67,7 @@ export default class Calendar extends React.Component {
     let title = prompt("Please enter a new title for your event");
     let calendarApi = selectInfo.view.calendar;
 
-    calendarApi.unselect(); // clear date selection
+    calendarApi.unselect();
 
     if (title) {
       calendarApi.addEvent({
@@ -83,17 +80,28 @@ export default class Calendar extends React.Component {
     }
   };
 
-  handleEventAdd = () => {
-    let title = prompt("Please enter a new title for your event");
-    let calendarApi = this.dateSelected;
+  renderEventContent = (eventInfo) => {
+    return (
+      <>
+        <b>{eventInfo.timeText}</b>
+        <i> {eventInfo.event.title}</i>
+      </>
+    );
+  };
 
-    if (title) {
-      this.dateSelected.addEvent({
-        title,
-        start: calendarApi.startStr,
-        end: calendarApi.endStr,
-        allDay: calendarApi.allDay,
-      });
+  handleEventClick = (clickInfo) => {
+    if (
+      confirm(
+        `Are you sure you want to delete the event '${clickInfo.event.title}'`
+      )
+    ) {
+      clickInfo.event.remove();
     }
+  };
+
+  handleEvents = (events) => {
+    this.setState({
+      currentEvents: events,
+    });
   };
 }
