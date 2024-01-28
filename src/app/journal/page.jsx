@@ -11,8 +11,10 @@ export default function JournlPage() {
 
   const getJournalEntries = async () => {
     try {
-      const res = await axios.get("/api/journals/getEntries");
-      setData(res.data.data);
+      await axios.get("/api/journals/getEntries")
+      .then(function (response) {
+        setData(response.data.data);
+      });
     } catch (error) {
       console.error("Error fetching journal entries:", error);
     }
@@ -40,12 +42,11 @@ export default function JournlPage() {
           : data.map((entry) => (
               <div
                 key={entry._id}
-                className="border border-gray-300 p-4 rounded-lg"
+                className="border border-neutral p-4 rounded-lg mt-4"
               >
                 <Link
-                  className="text-blue-500 hover:underline"
+                  className="link link-hover link-info"
                   href={`/journal/${entry._id}`}
-                  passHref
                 >
                   {entry.title}
                 </Link>

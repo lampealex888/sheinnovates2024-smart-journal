@@ -2,29 +2,26 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 export default function JournalEntry({ params }) {
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get("/api/journals/getEntry/" + params.id);
-        setData(res.data.data);
-        console.log(res.data.data);
-      } catch (error) {
-        console.log("Entry failed", error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getJournalEntry = async () => {
+    try {
+      const journalEntry = await axios
+        .get("/api/journals/getEntry", params)
+        .then(function (response) {
+          setData(response.data.data);
+        });
+    } catch (error) {
+      console.log("Entry failed", error.message);
+    }
+  };
 
-    fetchData();
-  }, [params.id, params.userId]);
+  useEffect(() => {
+    getJournalEntry();
+  });
 
   return (
     <>
@@ -35,7 +32,6 @@ export default function JournalEntry({ params }) {
           <h1>{data.title}</h1>
           <p>{data.date}</p>
           <p>{data.content}</p>
-          {console.log(data)}
         </div>
       )}
     </>

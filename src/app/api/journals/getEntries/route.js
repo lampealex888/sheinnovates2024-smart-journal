@@ -7,13 +7,15 @@ connect();
 
 export async function GET(request) {
   try {
-    const user = await getDataFromToken(request);
-    const journals = await Journal.find({ user });
+    const userId = await getDataFromToken(request);
+    const journals = await Journal.find({ userId: userId });
+
     if (!journals) {
       return NextResponse.json({ message: "Journals not found" }, { status: 404 });
     }
+
     return NextResponse.json({
-      message: "Journals found",
+      message: "Journal entries found",
       data: journals,
     });
   } catch (error) {

@@ -1,9 +1,9 @@
 "use client";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 
 export default function CreateJournalEntry({ params }) {
   const router = useRouter();
@@ -19,8 +19,8 @@ export default function CreateJournalEntry({ params }) {
   const onEntry = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/users/me");
-      setEntry({ ...entry, userId: res.data.data._id });
+      const user = await axios.get("/api/users/me");
+      setEntry({ ...entry, userId: user.data.data._id });
       const response = await axios.post("/api/journals/createEntry", entry);
       router.push("/journal");
     } catch (error) {
@@ -43,36 +43,54 @@ export default function CreateJournalEntry({ params }) {
   }, [entry]);
 
   return (
-    <div className="flex flex-col">
-      <h1>{loading ? "Processing" : "Journal Entry"}</h1>
-      <label htmlFor="title">title</label>
+    <div className="max-w-lg mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-4">
+        {loading ? "Processing" : "Journal Entry"}
+      </h1>
+      <label htmlFor="title" className="text-2xl font-semibold">
+        Title
+      </label>
       <input
         id="title"
         type="text"
         value={entry.title}
         onChange={(e) => setEntry({ ...entry, title: e.target.value })}
-        placeholder="title"
+        placeholder="Title"
+        className="w-full rounded-lg input input-bordered text-lg mt-1 mb-4"
       />
-      <label htmlFor="date">date</label>
+      <label htmlFor="date" className="text-2xl font-semibold mb-2">
+        Date
+      </label>
       <input
         id="date"
         type="date"
         value={entry.date}
         onChange={(e) => setEntry({ ...entry, date: e.target.value })}
-        placeholder="date"
+        placeholder="Date"
+        className="w-full rounded-lg input input-bordered text-lg mt-1 mb-4"
       />
-      <label htmlFor="content">content</label>
+      <label htmlFor="content" className="text-2xl font-semibold mb-2">
+        Content
+      </label>
       <textarea
         id="content"
-        type="text"
         value={entry.content}
         onChange={(e) => setEntry({ ...entry, content: e.target.value })}
-        placeholder="content"
+        placeholder="Content"
+        className="w-full rounded-lg input input-lg input-bordered text-lg mt-1"
       />
-      <button onClick={onEntry}>
-        {buttonDisabled ? "Fill out required forms" : "Create entry"}
+      <button
+        onClick={onEntry}
+        disabled={buttonDisabled}
+        className={`mt-4 rounded-lg btn btn-success text-lg font-semibold mr-4 ${
+          buttonDisabled ? "opacity-50 cursor-not-allowed" : null
+        }`}
+      >
+        {loading ? "Processing" : "Create Entry"}
       </button>
-      <Link href="/journal">Go back</Link>
+      <Link className="mt-4 rounded-lg btn btn-outline btn-info text-lg font-semibold" href="/journal">
+        Go back
+      </Link>
     </div>
   );
 }
