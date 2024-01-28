@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -10,7 +8,7 @@ function WeatherPage() {
   // const apiKey = process.env.WEATHER_API_KEY;
   // const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   // const apiKey = "0adfa1ef116b49c1b93214506242701";
-  const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+  const apiKey = process.env.WEATHER_API_KEY;
   
 
   const getWeather = async (e) => {
