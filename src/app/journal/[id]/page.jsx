@@ -6,15 +6,17 @@ import { format, parseISO } from "date-fns";
 
 export default function JournalEntry({ params }) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getJournalEntry = async () => {
     try {
+      setLoading(true);
       const journalEntry = await axios
         .get("/api/journals/getEntry", params)
         .then(function (response) {
           setData(response.data.data);
         });
+      setLoading(false);
     } catch (error) {
       console.log("Entry failed", error.message);
     }
@@ -22,7 +24,7 @@ export default function JournalEntry({ params }) {
 
   useEffect(() => {
     getJournalEntry();
-  });
+  }, []);
 
   return (
     <>
