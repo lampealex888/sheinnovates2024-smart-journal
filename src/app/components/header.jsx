@@ -30,9 +30,6 @@ export default function Header() {
               <Link href="../weather">Weather</Link>
             </li>
             <li>
-              <Link href="../chat">Chat</Link>
-            </li>
-            <li>
               <Link href="../journal">Journal</Link>
             </li>
             <li>
