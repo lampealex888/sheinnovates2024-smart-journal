@@ -1,5 +1,5 @@
-import { connect } from "@/dbConfig/dbConfig";
-import Journal from "@/models/journalModel";
+import { connect } from "@/lib/db";
+import Journal from "@/models/journal";
 import { NextResponse } from "next/server";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 

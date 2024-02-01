@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Cookies from "js-cookie";
 export default function Login() {
   const router = useRouter();
 
@@ -18,7 +17,6 @@ export default function Login() {
   const onLogin = async () => {
     try {
       setLoading(true);
-      Cookies.set('loggedIn', true);
       const response = await axios.post("/api/users/login", user);
       router.push("/");
     } catch (error) {
