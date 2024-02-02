@@ -1,7 +1,10 @@
 "use client";
+
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Header() {
+  const { data: session } = useSession();
   return (
     <div className="navbar bg-base-300">
       <div className="navbar-start">
@@ -24,23 +27,14 @@ export default function Header() {
       </div>
       <div className="navbar-center"></div>
       <div className="navbar-end">
-        <Link href="/profile" className="btn btn-ghost btn-circle">
-          <div className="indicator">
-            <svg
-              className="h-5 w-5"
-              viewBox="0 0 60.671 60.671"
-              fill="currentColor"
-              stroke="currentColor"
-            >
-              <ellipse cx="30.336" cy="12.097" rx="11.997" ry="12.097" />
-              <path
-                d="M35.64,30.079H25.031c-7.021,0-12.714,5.739-12.714,12.821v17.771h36.037V42.9
-			C48.354,35.818,42.661,30.079,35.64,30.079z"
-              />
-            </svg>
-            <span className="badge badge-xs badge-primary indicator-item"></span>
-          </div>
-        </Link>
+        {session ? (
+          <>
+            <p>{session.user.email}</p>
+            <button onClick={() => signOut()}>Sign Out</button>
+          </>
+        ) : (
+          <button onClick={() => signIn()}>Sign in</button>
+        )}
       </div>
     </div>
   );

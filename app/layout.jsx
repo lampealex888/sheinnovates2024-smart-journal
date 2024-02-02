@@ -1,7 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "../components/header";
-import Footer from "../components/footer";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import Provider from "@/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,15 +24,17 @@ export default function RootLayout({ children }) {
           sizes="<generated>"
         />
       </head>
-      <body className={inter.className}>
-        <div className="flex flex-col min-h-screen overflow-hidden justify-between">
-          <div>
-          <Header />
-          {children}
+      <Provider>
+        <body className={inter.className}>
+          <div className="flex flex-col min-h-screen overflow-hidden justify-between">
+            <div>
+              <Header />
+              {children}
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </body>
+        </body>
+      </Provider>
     </html>
   );
 }

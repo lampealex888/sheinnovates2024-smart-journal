@@ -1,19 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useSession, signIn } from "next-auth/react";
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   if (Cookies.get("token") !== undefined) {
-  //     setIsLoggedIn(true);
-  //   } else {
-  //     setIsLoggedIn(false);
-  //   }
-  // }, []);
+  const { data: session } = useSession();
 
   return (
     <main>
@@ -34,9 +25,11 @@ export default function Home() {
               Connect with others to plan meetups, receive reminders, and get
               calendar suggestions.
             </p>
-            <Link href="/login" className="btn btn-primary">
-              Get Started
-            </Link>
+            {session ? null : (
+              <button onClick={() => signIn()} className="btn btn-primary">
+                Get Started
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -6,24 +6,25 @@ import { useState, useEffect } from "react";
 import { format, parseISO } from "date-fns";
 
 export default function JournlPage() {
-  const [journals, setJournals] = useState();
+  const [journal, setJournal] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    getJournalEntries();
-  }, []);
-
-  const getJournalEntries = async () => {
+  const fetchData = async () => {
     try {
       setLoading(true);
       await axios.get("/api/journal").then((response) => {
-        setJournals(response.data.data);
+        setJournal(response.data);
       });
-      setLoading(false);
     } catch (error) {
-      console.error("Error fetching journal entries:", error);
+      console.error("Error", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto my-8 p-4 bg-base-200 rounded-lg shadow-lg gap-4">
@@ -31,12 +32,12 @@ export default function JournlPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {loading ? (
           "Loading"
-        ) : journals.length === 0 ? (
+        ) : journal.length === 0 ? (
           <div className="border border-neutral p-4 rounded-lg mt-4 bg-neutral text-neutral-content">
             No entries found
           </div>
         ) : (
-          journals.map((entry) => (
+          journal.map((entry) => (
             <div
               key={entry._id}
               className="border border-neutral p-4 rounded-lg mt-4 bg-neutral text-neutral-content"

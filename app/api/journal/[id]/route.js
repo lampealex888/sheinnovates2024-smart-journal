@@ -1,42 +1,41 @@
-import { connect } from "../../../../lib/db";
-import Journal from "../../../../models/journal";
-import { NextResponse } from "next/server";
+import db from "@/lib/db";
+import Entry from "@/models/entry";
 
 export async function GET(req, ctx) {
-  await connect();
+  await db.connect();
   const id = ctx.params.id;
   try {
-    const journal = await Journal.findById(id);
-    return new NextResponse(JSON.stringify(journal), { status: 200 });
+    const entry = await Entry.findById(id);
+    return new Response(JSON.stringify(entry), { status: 200 });
   } catch (error) {
-    return new NextResponse(JSON.stringify(null), { status: 500 });
+    return new Response(JSON.stringify(null), { status: 500 });
   }
 }
 
-// export async function PUT(req, ctx) {
-//   const id = ctx.params.id;
-//   try {
-//     const body = await req.json();
-//     const updateJournal = await Journal.findByIdAndUpdate(
-//       id,
-//       { $set: { ...body } },
-//       { new: true }
-//     );
-//     return new NextResponse(JSON.stringify(updateTask), { status: 200 });
-//   } catch (error) {
-//     return new NextResponse(JSON.stringify(null), { status: 500 });
-//   }
-// }
+export async function PUT(req, ctx) {
+  await db.connect();
+  const id = ctx.params.id;
+  try {
+    const body = await req.json();
+    const updateEntry = await Entry.findByIdAndUpdate(
+      id,
+      { $set: { ...body } },
+      { new: true }
+    );
+    return new Response(JSON.stringify(updateEntry), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify(null), { status: 500 });
+  }
+}
 
-// export async function DELETE(req, ctx) {
-//   const id = ctx.params.id;
-//   try {
-//     const journal = await Journal.findById(id);
-//     await Journal.findByIdAndDelete(id);
-//     return new NextResponse(JSON.stringify({ msg: "Deleted" }), {
-//       status: 200,
-//     });
-//   } catch (error) {
-//     return new NextResponse(JSON.stringify(null), { status: 500 });
-//   }
-// }
+export async function DELETE(req, ctx) {
+  await db.connect();
+  const id = ctx.params.id;
+  try {
+    const entry = await Entry.findById(id);
+    await Entry.findByIdAndDelete(id);
+    return new Response(JSON.stringify({ msg: "Deleted" }), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify(null), { status: 500 });
+  }
+}

@@ -1,74 +1,77 @@
 "use client";
 
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { format, parseISO } from "date-fns";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { format, parseISO } from "date-fns";
 
-export default function JournalEntry(ctx) {
-  const [journal, setJournal] = useState([]);
+export default function EntryPage(ctx) {
+  const [entry, setEntry] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { data: session, status } = useSession();
 
-  const fetchData = async (journalId) => {
+  const fetchData = async (entryId) => {
     try {
       setLoading(true);
       await axios
-        .get(`/api/journal/${journalId}`)
+        .get(`/api/journal/${entryId}`)
         .then((response) => {
-          setJournal(response.data);
+          setEntry(response);
         })
         .catch((error) => {
-          console.error("Error fetching journal entry:", error);
+          console.error("Error", error);
         });
-      setLoading(false);
     } catch (error) {
-      console.log("Entry failed", error.message);
+      console.log("Error", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData(ctx.params.id);
-  }, [ctx.params.id]);
+    if (status === "authenticated") {
+      fetchData(ctx.params.id);
+    }
+  }, [ctx.params.id, status]);
 
+  if (status !== "authenticated") {
+    return <span className="text-center">Not Authorized</span>;
+  }
   const handleDeleteTask = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/journal/${ctx.params.id}`);
-      router.push("/journal");
+      await axios.delete(`/api/journal/${ctx.params.id}`).then(() => {
+        router.push("/journal");
+      });
     } catch (error) {
-      console.error("Error deleting journal entry:", error);
+      console.error("Error", error);
+    } finally {
+      setLoading(false);
     }
+  };
+  if (!entry) {
+    return <span className="text-center">Loading</span>;
   }
-  
+
   return (
-    <>
-      {loading ? (
-        "Loading"
-      ) : (
-        <div className="max-w-5xl mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold mb-2">{journal.title}</h1>
-          {journal.date == null ? null : (
-            <span className="">
-              {format(parseISO(journal.date), "MM/dd/yyyy")}
-            </span>
-          )}
-          <p>{journal.content}</p>
-          <Link
-            href={`/journal/edit/${ctx.params.id}`}
-            className="btn btn-warning text-lg m-4"
-          >
-            Edit
-          </Link>
-          <button
-            onClick={handleDeleteTask}
-            className="btn btn-error text-lg m-4"
-          >
-            Delete
-          </button>
-        </div>
+    <div className="max-w-5xl mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-2">{entry.title}</h1>
+      {entry.date == null ? null : (
+        <span className="">{format(parseISO(entry.date), "MM/dd/yyyy")}</span>
       )}
-    </>
+      <p>{entry.content}</p>
+      <Link
+        href={`/journal/edit/${ctx.params.id}`}
+        className="btn btn-warning text-lg m-4"
+      >
+        Edit
+      </Link>
+      <button onClick={handleDeleteTask} className="btn btn-error text-lg m-4">
+        Delete
+      </button>
+    </div>
   );
 }

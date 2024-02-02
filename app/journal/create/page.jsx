@@ -21,12 +21,10 @@ export default function CreateEntry({ params }) {
   const handleCreateEntry = async () => {
     try {
       setLoading(true);
-      const user = await axios.get("/api/users/me");
-      setEntry({ ...entryData, userId: user.data.data._id });
-      const response = await axios.post("/api/journal", entryData);
+      await axios.post("/api/journal", entryData);
       router.push("/journal");
     } catch (error) {
-      console.log("Entry failed", error.message);
+      console.log("Error", error);
     } finally {
       setLoading(false);
     }
@@ -47,46 +45,42 @@ export default function CreateEntry({ params }) {
   return (
     <div className="max-w-7xl mx-auto my-8 p-4 bg-base-100 rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold">Journal Entry</h1>
-      <form className="py-4" onSubmit={handleCreateEntry}>
-        <label htmlFor="title" className="text-2xl font-semibold">
-          Title
-        </label>
-        <input
-          id="title"
-          type="text"
-          value={entryData.title}
-          onChange={(e) => setEntryData({ ...entryData, title: e.target.value })}
-          placeholder="Title"
-          className="w-full rounded-lg input input-bordered text-lg mt-1 mb-4"
-        />
-        <label htmlFor="date" className="text-2xl font-semibold mb-2">
-          Date
-        </label>
-        <input
-          id="date"
-          type="date"
-          value={entryData.date}
-          onChange={(e) => setEntryData({ ...entryData, date: e.target.value })}
-          placeholder="Date"
-          className="w-full rounded-lg input input-bordered text-lg mt-1 mb-4"
-        />
-        <label htmlFor="content" className="text-2xl font-semibold mb-2">
-          Content
-        </label>
-        <SimpleMDE
-          value={entryData.content}
-          onChange={(value) => setEntryData({ ...entryData, content: value })}
-        />
-        <button
-          type="submit"
-          disabled={buttonDisabled}
-          className={
-            "mt-4 rounded-lg btn btn-success text-lg font-semibold mr-4"
-          }
-        >
-          {loading ? "Processing" : "Create Entry"}
-        </button>
-      </form>
+      <label htmlFor="title" className="text-2xl font-semibold">
+        Title
+      </label>
+      <input
+        id="title"
+        type="text"
+        value={entryData.title}
+        onChange={(e) => setEntryData({ ...entryData, title: e.target.value })}
+        placeholder="Title"
+        className="w-full rounded-lg input input-bordered text-lg mt-1 mb-4"
+      />
+      <label htmlFor="date" className="text-2xl font-semibold mb-2">
+        Date
+      </label>
+      <input
+        id="date"
+        type="date"
+        value={entryData.date}
+        onChange={(e) => setEntryData({ ...entryData, date: e.target.value })}
+        placeholder="Date"
+        className="w-full rounded-lg input input-bordered text-lg mt-1 mb-4"
+      />
+      <label htmlFor="content" className="text-2xl font-semibold mb-2">
+        Content
+      </label>
+      <SimpleMDE
+        value={entryData.content}
+        onChange={(value) => setEntryData({ ...entryData, content: value })}
+      />
+      <button
+        onClick={handleCreateEntry}
+        disabled={buttonDisabled}
+        className={"mt-4 rounded-lg btn btn-success text-lg font-semibold mr-4"}
+      >
+        {loading ? "Processing" : "Create Entry"}
+      </button>
       <Link
         className="mt-4 rounded-lg btn btn-info text-lg font-semibold"
         href="/journal"
