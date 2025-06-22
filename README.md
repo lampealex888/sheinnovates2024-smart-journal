@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Smart Journal
+
+## Description
+
+Smart Journal is an app that allows you to easily manage a personal/professional journal and your calendar appointments, all assisted with the power of OpenAI.
+
+Listed features:
+
+- Easily create journal entries by providing a basic summary and our AI will fully flesh out your entry for you!
+- If any events are detected in your journal entry it will automatically be added to your calendar
+- Provides you with personalized recommendations for dinner ideas, featured events, and even journaling prompts.
+- Will add weather events to your calendar such as bringing an umbrella if it's predicted to rain a certain day
+- Our comprehensive security features ensure that your journal and calendar stay private
+
+All of these features are provided to you of absolutely no charge! The only thing we ask from you is to provide feedback to our app so that we may improve it for all users
 
 ## Getting Started
 
-First, run the development server:
+First, install all necessary dependencies and run the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
